@@ -809,7 +809,7 @@ c--- The imaginary part of the 2-loop form factor
 
 c--- Calculate the 1-loop form factor
 
-      F_1l = mt2*(two-s(1,2)*C0mt*(1d0-4d0*mt2/s(1,2)))
+      F_1l = t4_c6*mt2*(two-s(1,2)*C0mt*(1d0-4d0*mt2/s(1,2)))
      &  /(two*wmass*sinthw)
 
 c--- Anomalous top allowed
@@ -822,7 +822,7 @@ c--- Calculate the 2-loop form factor
       call lin_interpolate(Fim_x, Fim_y, size(Fim_x), sqrts, Fim)
       F_2l = dcmplx(Fre,Fim)
 
-      F_2l = MH2/(two*wmass*sinthw)*dcmplx(Fre,Fim)
+      F_2l = t5_c6*MH2/(two*wmass*sinthw)*dcmplx(Fre,Fim)
 
 c--- Wave function renormalisation constant
 

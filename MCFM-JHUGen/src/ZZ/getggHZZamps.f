@@ -29,7 +29,7 @@ c---
       include 'qlfirst.f'
       integer h1,h34,h56
       integer AllowAnomTriLinear, wfn
-      double precision wf(11)
+      double precision wf(12)
       double precision p(mxpart,4),mb2,mt2,mtX2,mbX2
       double precision MH2
       double precision dB0h, dZh
@@ -89,7 +89,7 @@ c--- Amplitudes for production
 
 
 c--- Check if any wavefunctions are non zero
-      wf = (/ t1_c6,t2_c6,t3_c6,t4_c6,t5_c6,t6_c6,
+      wf = (/ t1_c6,t2_c6,t3_c6,t4_c6,t5_c6,t6_c6,t7_c6,
      & w1_c6,w2_c6,w3_c6,w4_c6,w5_c6 /)
       do wfn = 1, size(wf)
         if(wf(wfn) .ne. 0) then 
@@ -106,8 +106,8 @@ c--- for width corrections due to c6 operator
         dB0h = (-9 + 2*Sqrt(3.)*Pi)/(9.*MH2)
         dZh = (-9*c6*(2.d0 + c6)*dB0h*MH2**2)/(32.d0*Pi**2*vevsq)
         hwidth_c6 = 0.0023*c6*hwidth
-        width_c6 = im*hmass*(t5_c6*w4_c6*dZh*hwidth -
-     &  t6_c6*(w5_c6*dZh/2.d0*hwidth + hwidth_c6))*prop12
+        width_c6 = im*hmass*(t6_c6*w4_c6*dZh*hwidth -
+     &  t7_c6*(w5_c6*dZh/2.d0*hwidth + hwidth_c6))*prop12
 
 c--- c6 production corrections
         call anomhggvtxamp_c6(za,zb,ggHmt_c6)
@@ -200,7 +200,7 @@ c--- propagator correction
      &     H4lSM(h34,h56)*prop12_c6/prop12
 c--- production correction
       Mloop_c6_production(h1,h1,h34,h56) =
-     &     t4_c6*ggHmt_c6(h1,h1)* H4lSM(h34,h56)
+     &     ggHmt_c6(h1,h1)* H4lSM(h34,h56)
      &     * (2*wmass*sqrt(xw))
 c--- decay correction  
       Mloop_c6_decay(h1,h1,h34,h56)=im*ggHmt(h1,h1)*

@@ -29,7 +29,7 @@ c     Begin anomalous couplings
       include 'spinzerohiggs_anomcoupl.f'
       include 'AnomZffCouplings.f'
 
-      data AllowAnomalousCouplings / 0 / ! Disables anomalous couplings
+      data AllowAnomalousCouplings / 1 / ! Disables anomalous couplings
       data AllowAnomalousZffCouplings / 0 / ! Disables anomalous Zff Couplings
       data distinguish_HWWcouplings / 0 /
       data AnomalCouplPR,AnomalCouplDK / 1, 1/
@@ -45,9 +45,9 @@ c     4th generation quark masses
 
 c     MARKUS: anomalous couplings for the first resonance
 c     Hgg and Hff anomalous couplings
-      data kappa_top / (0d0,0d0) / ! SM=1,0
+      data kappa_top / (1d0,0d0) / ! SM=1,0
       data kappa_tilde_top / (0d0,0d0) / ! SM=0,0
-      data kappa_bot / (0d0,0d0) / ! SM=1,0
+      data kappa_bot / (1d0,0d0) / ! SM=1,0
       data kappa_tilde_bot / (0d0,0d0) / ! SM=0,0
       data ghg2 / (0d0,0d0) / ! SM=0,0
       data ghg3 / (0d0,0d0) / ! SM=0,0
@@ -84,7 +84,7 @@ c     HVV anomalous couplings
       data Lambda_z30 / 100d0 /
       data Lambda_z40 / 100d0 /
 
-      data ghz1 / (1d0,0d0) /
+      data ghz1 / (0d0,0d0) /
       data ghz1_prime / (0d0,0d0) /
       data ghz1_prime2 / (0d0,0d0) /
       data ghz1_prime3 / (0d0,0d0) /
@@ -152,7 +152,7 @@ c     HVV anomalous couplings
       data Lambda_w30 / 100d0 /
       data Lambda_w40 / 100d0 /
 
-      data ghw1 / (1d0,0d0) /
+      data ghw1 / (0d0,0d0) /
       data ghw1_prime / (0d0,0d0) /
       data ghw1_prime2 / (0d0,0d0) /
       data ghw1_prime3 / (0d0,0d0) /
@@ -196,16 +196,17 @@ c     Form Factors in Higgs Propagator
       data n_ff2 / 0 / ! n = 0 will not change propagator
 
 c     Higgs tri-linear coupling and WFR constants
-      data c6 /0d0/ ! SM = 0 
+      data c6 /12d0/ ! SM = 0 
       data t1_c6 /0d0/ ! All ti should = 1 to include all effects
       data t2_c6 /0d0/
       data t3_c6 /0d0/
-      data t4_c6 /0d0/
-      data t5_c6 /0d0/
+      data t4_c6 /1d0/
+      data t5_c6 /1d0/
       data t6_c6 /0d0/
+      data t7_c6 /0d0/
       data w1_c6 /0d0/ ! All wi should = 1 to include all effects
       data w2_c6 /0d0/
-      data w3_c6 /0d0/
+      data w3_c6 /1d0/
       data w4_c6 /0d0/
       data w5_c6 /0d0/
 
