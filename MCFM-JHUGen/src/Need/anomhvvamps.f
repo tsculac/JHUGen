@@ -698,7 +698,7 @@ c--- The imaginary part of the 2-loop form factor
      &1481.0, 1491.0, 1501.0, 1511.0, 1521.0,
      &1531.0, 1541.0, 1551.0, 1561.0, 1571.0, 
      &1581.0, 1591.0, 1601.0, 1611.0, 1621.0,
-     &1631.0, 1641.0, 1651.0, 1661.0, 1671.0, 
+     &1631.0, 1641.0, 1651.0, 1661.0, 1671.0,  
      &1681.0, 1691.0, 1701.0, 1711.0, 1721.0,
      &1731.0, 1741.0, 1751.0, 1761.0, 1771.0, 
      &1781.0, 1791.0, 1801.0, 1811.0, 1821.0,
@@ -839,8 +839,7 @@ c--- Assemble the renormalised 2-loop form factor
       return
       end
 
-      subroutine anomhzzamp_c6(prop34,prop56,za,zb,
-     & H4l_c6_gmunu,H4l_c6_qmuqnu)
+      function anomhzzamp_c6_g1(i3,i4,i5,i6,qhsq,q1sq,q2sq,za,zb)
       implicit none
       include 'constants.f'
       include 'masses.f'
@@ -851,9 +850,9 @@ c--- Assemble the renormalised 2-loop form factor
       include 'zprods_decl.f'
       include 'ewcouple.f'
       include 'qlfirst.f'
-      double complex H4l(2,2),prop34,prop56
-      double complex H4l_c6_gmunu(2,2),HZZ_c6_gmunu
-      double complex H4l_c6_qmuqnu(2,2),HZZ_c6_qmuqnu
+      double complex anomhzzamp_c6_g1
+      double complex H4l,HZZ_c6_gmunu
+      integer i3,i4,i5,i6
       double precision mb2,mt2,sinthw
       double precision qhsq, q1sq, q2sq, MH2, MZ2, dB0h, dZh, Z
       double precision sqrts 
@@ -866,14 +865,7 @@ c--- Possible in the future to modify AnomHZZ
       sinthw=sqrt(xw)
 
 c--- SM Amplitudes for decay
-      H4l(1,1)=za(3,5)*zb(4,6)*l1*l2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56
-      H4l(2,1)=za(4,5)*zb(3,6)*r1*l2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56
-      H4l(1,2)=za(3,6)*zb(4,5)*l1*r2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56
-      H4l(2,2)=za(4,6)*zb(3,5)*r1*r2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56
+      H4l=za(i3,i5)*zb(i4,i6)*wmass/(sinthw*(1d0-xw))
 
 c--- c6 correction to HZZ vertex
 
@@ -881,10 +873,6 @@ c--- c6 correction to HZZ vertex
         qlfirst=.false.
       call qlinit 
       endif
-    
-      qhsq = s(1,2)
-      q1sq = s(3,4)
-      q2sq = s(5,6)
 
       dB0h = (-9 + 2*Sqrt(3.)*Pi)/(9.*MH2)
       dZh  = -w2_c6*dB0h 
@@ -913,11 +901,35 @@ c--- SM part of HZZ vertex
 
 c---  BSM amplitudes for decay proportional to metric
       
-      H4l_c6_gmunu(1,1)= H4l(1,1)*HZZ_c6_gmunu
-      H4l_c6_gmunu(2,1)= H4l(2,1)*HZZ_c6_gmunu
-      H4l_c6_gmunu(1,2)= H4l(1,2)*HZZ_c6_gmunu
-      H4l_c6_gmunu(2,2)= H4l(2,2)*HZZ_c6_gmunu
+      anomhzzamp_c6_g1= H4l*HZZ_c6_gmunu
 
+      return
+      end
+
+      function anomhzzamp_c6_g2(i3,i4,i5,i6,qhsq,q1sq,q2sq,za,zb)
+      implicit none
+      include 'constants.f'
+      include 'masses.f'
+      include 'scale.f'
+      include 'zcouple.f'
+      include 'spinzerohiggs_anomcoupl.f'
+      include 'sprods_com.f'
+      include 'zprods_decl.f'
+      include 'ewcouple.f'
+      include 'qlfirst.f'
+      double complex anomhzzamp_c6_g2
+      double complex H4l_c6_qmuqnu,HZZ_c6_qmuqnu
+      integer i3,i4,i5,i6
+      double precision mb2,mt2,sinthw
+      double precision qhsq, q1sq, q2sq, MH2, MZ2, dB0h, dZh, Z
+      double precision sqrts 
+      double complex qlI2,qlI3,C0mt
+
+c--- SM H4l amplitude 
+c--- Possible in the future to modify AnomHZZ
+      MH2  = hmass**2
+      MZ2  = zmass**2
+      sinthw=sqrt(xw)
       
 c--- Non-SM part of HZZ vertex         
 
@@ -958,20 +970,9 @@ c--- Non-SM part of HZZ vertex
 
 c---  BSM amplitudes for decay proportional to momenta. See Appendix A of https://arxiv.org/pdf/1902.04756.pdf
       
-      H4l_c6_qmuqnu(1,1)=-(za(3,5)*zb(4,5)+za(3,6)*zb(4,6))
-     &        *(za(3,5)*zb(3,6)+za(4,5)*zb(4,6))*l1*l2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56*HZZ_c6_qmuqnu   
-      H4l_c6_qmuqnu(2,1)=-(za(4,5)*zb(3,5)+za(4,6)*zb(3,6))
-     &        *(za(3,5)*zb(3,6)+za(4,5)*zb(4,6))*r1*l2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56*HZZ_c6_qmuqnu    
-      H4l_c6_qmuqnu(1,2)=-(za(3,5)*zb(4,5)+za(3,6)*zb(4,6))
-     &        *(za(3,6)*zb(3,5)+za(4,6)*zb(4,5))*l1*r2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56*HZZ_c6_qmuqnu         
-      H4l_c6_qmuqnu(2,2)=-(za(4,5)*zb(3,5)+za(4,6)*zb(3,6))
-     &        *(za(3,6)*zb(3,5)+za(4,6)*zb(4,5))*r1*r2
-     &        *wmass/(sinthw*(1d0-xw))*prop34*prop56*HZZ_c6_qmuqnu      
-
-
+      anomhzzamp_c6_g2=-(za(i3,i5)*zb(i4,i5)+za(i3,i6)*zb(i4,i6))
+     &        *(za(i3,i5)*zb(i3,i6)+za(i4,i5)*zb(i4,i6))
+     &        *wmass/(sinthw*(1d0-xw))*HZZ_c6_qmuqnu   
       return
       end
 
@@ -981,7 +982,7 @@ c---  BSM amplitudes for decay proportional to momenta. See Appendix A of https:
       include 'constants.f'
       include 'zprods_decl.f'
       include 'ewcouple.f'
-      include 'sprods_com.f'
+      include 'sprods_com.f' 
       include 'scale.f'
       double complex ggHmt(2,2),C0mt,qlI3
       double precision mt2,sinthw
