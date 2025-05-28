@@ -305,8 +305,6 @@ C-- MARKUS: this is the old (original) MCFM code
       Amp_S_PR=za(i7,i8)*zb(i2,i1)/(propw17*propw28)
            endif
 
-      Amp_S_PR=Amp_S_PR+Amp_S_PR_c6
-
            if( AnomalCouplDK.eq.1 ) then
       Amp_S_DK=
      & -anomhzzamp(i3,i4,i5,i6,1,s3456,s(i3,i4),s(i5,i6),za,zb)
@@ -329,8 +327,6 @@ C-- MARKUS: this is the old (original) MCFM code
       Amp_S_DK=za(i3,i5)*zb(i6,i4)/(prop34*prop56)*ZZ3456(h34,h56)
            endif
 
-      Amp_S_DK=Amp_S_DK+Amp_S_DK_c6
-
       Amp_PROP_c6=-facHiggs*(za(i3,i5)*zb(i6,i4)/(prop34*prop56)
      & *ZZ3456(h34,h56))
      & *(za(i7,i8)*zb(i2,i1)/(propw17*propw28))/propz3456*Hbit
@@ -343,6 +339,8 @@ C-- MARKUS: this is the old (original) MCFM code
 
       WWZZamp(h34,h56)=WWZZamp(h34,h56)
      & -facHiggs*Amp_S_DK*Amp_S_PR/prop3456*Hbit
+     & -facHiggs*Amp_S_DK_c6*Amp_S_PR/prop3456*Hbit
+     & -facHiggs*Amp_S_DK*Amp_S_PR_c6/prop3456*Hbit
      & +Amp_PROP_c6+Amp_WIDTH_c6
 
       ! >>> Inserted printout here <<<

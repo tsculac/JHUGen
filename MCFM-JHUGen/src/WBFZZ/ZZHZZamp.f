@@ -272,8 +272,6 @@ C-- MARKUS: this is the old (original) MCFM code
      & +za(i7,i8)*zb(i2,i1)/(prop17*prop28)*ZZ1728(jdu1,jdu2,h17,h28)
           endif
 
-      Amp_S_PR=Amp_S_PR+Amp_S_PR_c6
-
           if( AnomalCouplDK.eq.1 ) then
       Amp_S_DK=Amp_S_DK
      & -anomhzzamp(i3,i4,i5,i6,1,s3456,s(i3,i4),s(i5,i6),za,zb)
@@ -300,8 +298,6 @@ C-- MARKUS: this is the old (original) MCFM code
       Amp_S_DK=Amp_S_DK
      & +za(i3,i5)*zb(i6,i4)/(prop34*prop56)*ZZ3456(h34,h56)
           endif
-
-      Amp_S_DK=Amp_S_DK+Amp_S_DK_c6
 
         endif
 
@@ -356,9 +352,6 @@ C-- MARKUS: this is the old (original) MCFM code
      & +za(i7,i5)*zb(i6,i1)/(prop17*prop56)*ZZ1756(jdu1,h17,h56)
           endif
 
-      Amp_T_PR=Amp_T_PR+Amp_T_PR_c6
-      Amp_U_PR=Amp_U_PR+Amp_U_PR_c6
-
           if( AnomalCouplDK.eq.1 ) then
       Amp_T_DK=Amp_T_DK
      & -anomhzzamp(i5,i6,i8,i2,1,s1734,s(i5,i6),s(i8,i2),za,zb)
@@ -408,9 +401,6 @@ C-- MARKUS: this is the old (original) MCFM code
      & +za(i8,i3)*zb(i4,i2)/(prop28*prop34)*ZZ2834(jdu2,h28,h34)
           endif
 
-      Amp_T_DK=Amp_T_DK+Amp_T_DK_c6
-      Amp_U_DK=Amp_U_DK+Amp_U_DK_c6
-
         endif
 
       endif
@@ -433,12 +423,37 @@ C-- MARKUS: this is the old (original) MCFM code
      & +fac*(
 C---s-channel
      & Amp_S_DK*Amp_S_PR/prop3456
+     & +Amp_S_DK_c6*Amp_S_PR/prop3456
+     & +Amp_S_DK*Amp_S_PR_c6/prop3456
 C---t-channel
      & +Amp_T_DK*Amp_T_PR/prop1734
+     & +Amp_T_DK_c6*Amp_T_PR/prop1734
+     & +Amp_T_DK*Amp_T_PR_c6/prop1734
 C---u-channel
      & +Amp_U_DK*Amp_U_PR/prop1756
+     & +Amp_U_DK_c6*Amp_U_PR/prop1756
+     & +Amp_U_DK*Amp_U_PR_c6/prop1756
      & )
      & +Amp_WIDTH_c6+Amp_PROP_c6
+
+      ! >>> Inserted printout here <<<
+C       print *, 'Amp_S_DK = ', Amp_S_DK
+C       print *, 'Amp_S_DK_c6 = ', Amp_S_DK_c6
+C       print *, 'Amp_S_PR = ', Amp_S_PR
+C       print *, 'Amp_S_PR_c6 = ', Amp_S_PR_c6
+C       print *, 'Amp_T_DK = ', Amp_T_DK
+C       print *, 'Amp_T_DK_c6 = ', Amp_T_DK_c6
+C       print *, 'Amp_T_PR = ', Amp_T_PR
+C       print *, 'Amp_T_PR_c6 = ', Amp_T_PR_c6
+C       print *, 'Amp_U_DK = ', Amp_U_DK
+C       print *, 'Amp_U_DK_c6 = ', Amp_U_DK_c6
+C       print *, 'Amp_U_PR = ', Amp_U_PR
+C       print *, 'Amp_U_PR_c6 = ', Amp_U_PR_c6
+C       print *, "Amp_PROP_c6=", Amp_PROP_c6
+C       print *, "Amp_WIDTH_c6=", Amp_WIDTH_c6 
+C       print *, 'ZZHamp(jdu1,jdu2,h17,h28,h34,h56) = ',
+C      & ZZHamp(jdu1,jdu2,h17,h28,h34,h56)
+C       stop
 
       Amp_S_PR=czip
       Amp_S_DK=czip
