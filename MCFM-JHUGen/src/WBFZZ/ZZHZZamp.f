@@ -423,16 +423,16 @@ C-- MARKUS: this is the old (original) MCFM code
      & +fac*(
 C---s-channel
      & Amp_S_DK*Amp_S_PR/prop3456
-     & +Amp_S_DK_c6*Amp_S_PR/prop3456
-     & +Amp_S_DK*Amp_S_PR_c6/prop3456
+     & +Amp_S_DK_c6*Amp_S_PR_SM/prop3456
+     & +Amp_S_DK_SM*Amp_S_PR_c6/prop3456
 C---t-channel
      & +Amp_T_DK*Amp_T_PR/prop1734
-     & +Amp_T_DK_c6*Amp_T_PR/prop1734
-     & +Amp_T_DK*Amp_T_PR_c6/prop1734
+     & +Amp_T_DK_c6*Amp_T_PR_SM/prop1734
+     & +Amp_T_DK_SM*Amp_T_PR_c6/prop1734
 C---u-channel
      & +Amp_U_DK*Amp_U_PR/prop1756
-     & +Amp_U_DK_c6*Amp_U_PR/prop1756
-     & +Amp_U_DK*Amp_U_PR_c6/prop1756
+     & +Amp_U_DK_c6*Amp_U_PR_SM/prop1756
+     & +Amp_U_DK_SM*Amp_U_PR_c6/prop1756
      & )
      & +Amp_WIDTH_c6+Amp_PROP_c6
 

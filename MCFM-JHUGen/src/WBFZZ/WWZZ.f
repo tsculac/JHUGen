@@ -16,8 +16,8 @@
       double complex WWZZamp(2,2),ggWW(2,2),propX3456,prop12,prop12_c6,
      & prop34,prop56,propw17,propw28,propWBF,prop3456,propz3456,
      & zab2,zba2,srWW(2,2),rxw,higgsprop,sigmah,
-     & sqzmass,Amp_S_DK,Amp_S_DK_c6,Amp_S_PR,Amp_S_PR_c6,
-     & Amp_PROP_c6, Amp_WIDTH_c6,hwidth_c6, width_c6,
+     & sqzmass,Amp_S_DK,Amp_S_DK_SM,Amp_S_DK_c6,Amp_S_PR,Amp_S_PR_SM,
+     & Amp_S_PR_c6,Amp_PROP_c6, Amp_WIDTH_c6,hwidth_c6, width_c6,
      & facHiggs,srL,srR,
      & srgmWW34(2,2),srgmWW56(2,2),srZWW34(2,2),srZWW56(2,2)
 !      & ,srggWW34(2,2),srggWW56(2,2)
@@ -286,6 +286,8 @@ C-- MARKUS: this is the old (original) MCFM code
 
          Amp_S_PR=czip
          Amp_S_DK=czip
+         Amp_S_DK_SM=czip
+         Amp_S_PR_SM=czip
          Amp_S_DK_c6=czip
          Amp_S_PR_c6=czip
          if( hmass.ge.zip .and. channeltoggle_stu.ne.1 ) then
@@ -300,10 +302,11 @@ C-- MARKUS: this is the old (original) MCFM code
      & *anomhwwamp_c6_g2(i7,i1,i8,i2,s3456,s(i7,i1),s(i8,i2),za,zb))
      & /(propw17*propw28)/wmass*(sinthw*(1d0-xw))
       !(1d0/(2*wmass*sqrt(xw)))
-
            else
       Amp_S_PR=za(i7,i8)*zb(i2,i1)/(propw17*propw28)
            endif
+
+      Amp_S_PR_SM=za(i7,i8)*zb(i2,i1)/(propw17*propw28)
 
            if( AnomalCouplDK.eq.1 ) then
       Amp_S_DK=
@@ -327,6 +330,8 @@ C-- MARKUS: this is the old (original) MCFM code
       Amp_S_DK=za(i3,i5)*zb(i6,i4)/(prop34*prop56)*ZZ3456(h34,h56)
            endif
 
+      Amp_S_DK_SM=za(i3,i5)*zb(i6,i4)/(prop34*prop56)*ZZ3456(h34,h56)
+
       Amp_PROP_c6=-facHiggs*(za(i3,i5)*zb(i6,i4)/(prop34*prop56)
      & *ZZ3456(h34,h56))
      & *(za(i7,i8)*zb(i2,i1)/(propw17*propw28))/propz3456*Hbit
@@ -339,8 +344,8 @@ C-- MARKUS: this is the old (original) MCFM code
 
       WWZZamp(h34,h56)=WWZZamp(h34,h56)
      & -facHiggs*Amp_S_DK*Amp_S_PR/prop3456*Hbit
-     & -facHiggs*Amp_S_DK_c6*Amp_S_PR/prop3456*Hbit
-     & -facHiggs*Amp_S_DK*Amp_S_PR_c6/prop3456*Hbit
+     & -facHiggs*Amp_S_DK_c6*Amp_S_PR_SM/prop3456*Hbit
+     & -facHiggs*Amp_S_DK_SM*Amp_S_PR_c6/prop3456*Hbit
      & +Amp_PROP_c6+Amp_WIDTH_c6
 
       ! >>> Inserted printout here <<<
