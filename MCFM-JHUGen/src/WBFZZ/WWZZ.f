@@ -332,14 +332,10 @@ C-- MARKUS: this is the old (original) MCFM code
 
       Amp_S_DK_SM=za(i3,i5)*zb(i6,i4)/(prop34*prop56)*ZZ3456(h34,h56)
 
-      Amp_PROP_c6=-facHiggs*(za(i3,i5)*zb(i6,i4)/(prop34*prop56)
-     & *ZZ3456(h34,h56))
-     & *(za(i7,i8)*zb(i2,i1)/(propw17*propw28))/propz3456*Hbit
+      Amp_PROP_c6=-facHiggs*Amp_S_PR_SM*Amp_S_DK_SM/propz3456*Hbit
      & *t1_c6*(prop12_c6/prop12)
 
-      Amp_WIDTH_c6=-facHiggs*(za(i3,i5)*zb(i6,i4)/(prop34*prop56)
-     & *ZZ3456(h34,h56))
-     & *(za(i7,i8)*zb(i2,i1)/(propw17*propw28))/propz3456*Hbit
+      Amp_WIDTH_c6=-facHiggs*Amp_S_PR_SM*Amp_S_DK_SM/propz3456*Hbit
      & *width_c6
 
       WWZZamp(h34,h56)=WWZZamp(h34,h56)
@@ -362,6 +358,7 @@ C       print *, 'SM = ', -facHiggs*(za(i3,i5)*zb(i6,i4)/(prop34*prop56)
 C      & *ZZ3456(h34,h56))
 C      & *(za(i7,i8)*zb(i2,i1)/(propw17*propw28))/propz3456*Hbit   
 C       print *, 'WWZZamp(h34,h56) = ', WWZZamp(h34,h56)
+C       stop
       
          endif
 
@@ -393,8 +390,6 @@ C----Second resonance
          endif
         enddo
       enddo
-
-      !stop
 
 C----Background contribution
 
